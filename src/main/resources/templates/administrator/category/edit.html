@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi" style="">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Thêm Danh Mục Mới - Admin Dashboard</title>
+<script
+	src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+	rel="stylesheet">
+<script id="tailwind-config">
+	tailwind.config = {
+		darkMode : "class",
+		theme : {
+			extend : {
+				"colors" : {
+					"on-surface-variant" : "#424656",
+					"surface-container" : "#e5eeff",
+					"tertiary-fixed" : "#ffdbd0",
+					"primary-container" : "#0066ff",
+					"on-primary-fixed-variant" : "#003fa4",
+					"inverse-surface" : "#213145",
+					"on-primary-fixed" : "#001849",
+					"secondary-fixed-dim" : "#b2c5ff",
+					"outline-variant" : "#c2c6d8",
+					"on-error" : "#ffffff",
+					"surface-variant" : "#d3e4fe",
+					"on-tertiary-container" : "#fff6f4",
+					"on-tertiary-fixed-variant" : "#832600",
+					"surface-container-highest" : "#d3e4fe",
+					"background" : "#f8f9ff",
+					"on-secondary-fixed" : "#001848",
+					"primary-fixed" : "#dae1ff",
+					"on-tertiary" : "#ffffff",
+					"surface" : "#f8f9ff",
+					"on-secondary-container" : "#fefcff",
+					"on-secondary" : "#ffffff",
+					"tertiary" : "#a33200",
+					"inverse-on-surface" : "#eaf1ff",
+					"error-container" : "#ffdad6",
+					"on-tertiary-fixed" : "#390c00",
+					"surface-bright" : "#f8f9ff",
+					"on-primary" : "#ffffff",
+					"tertiary-fixed-dim" : "#ffb59d",
+					"outline" : "#727687",
+					"surface-container-low" : "#eff4ff",
+					"surface-container-high" : "#dce9ff",
+					"on-secondary-fixed-variant" : "#0040a2",
+					"on-background" : "#0b1c30",
+					"primary" : "#0050cb",
+					"secondary-fixed" : "#dae2ff",
+					"surface-container-lowest" : "#ffffff",
+					"surface-tint" : "#0054d6",
+					"inverse-primary" : "#b3c5ff",
+					"secondary-container" : "#356ee7",
+					"on-primary-container" : "#f8f7ff",
+					"on-error-container" : "#93000a",
+					"secondary" : "#0453cd",
+					"tertiary-container" : "#cc4204",
+					"error" : "#ba1a1a",
+					"primary-fixed-dim" : "#b3c5ff",
+					"on-surface" : "#0b1c30",
+					"surface-dim" : "#cbdbf5"
+				},
+				"borderRadius" : {
+					"DEFAULT" : "0.25rem",
+					"lg" : "0.5rem",
+					"xl" : "0.75rem",
+					"full" : "9999px"
+				},
+				"spacing" : {
+					"lg" : "24px",
+					"xl" : "32px",
+					"gutter" : "24px",
+					"md" : "16px",
+					"sm" : "8px",
+					"base" : "4px",
+					"2xl" : "48px",
+					"xs" : "4px",
+					"sidebar-width" : "260px",
+					"container-max-width" : "1440px"
+				},
+				"fontFamily" : {
+					"caption" : [ "Inter" ],
+					"title-lg" : [ "Inter" ],
+					"body-lg" : [ "Inter" ],
+					"headline-md" : [ "Inter" ],
+					"headline-lg" : [ "Inter" ],
+					"title-md" : [ "Inter" ],
+					"display" : [ "Inter" ],
+					"label-md" : [ "Inter" ],
+					"body-md" : [ "Inter" ]
+				},
+				"fontSize" : {
+					"caption" : [ "12px", {
+						"lineHeight" : "16px",
+						"fontWeight" : "400"
+					} ],
+					"title-lg" : [ "18px", {
+						"lineHeight" : "26px",
+						"fontWeight" : "600"
+					} ],
+					"body-lg" : [ "16px", {
+						"lineHeight" : "24px",
+						"fontWeight" : "400"
+					} ],
+					"headline-md" : [ "20px", {
+						"lineHeight" : "28px",
+						"fontWeight" : "600"
+					} ],
+					"headline-lg" : [ "24px", {
+						"lineHeight" : "32px",
+						"letterSpacing" : "-0.01em",
+						"fontWeight" : "600"
+					} ],
+					"title-md" : [ "16px", {
+						"lineHeight" : "24px",
+						"fontWeight" : "600"
+					} ],
+					"display" : [ "30px", {
+						"lineHeight" : "38px",
+						"letterSpacing" : "-0.02em",
+						"fontWeight" : "700"
+					} ],
+					"label-md" : [ "12px", {
+						"lineHeight" : "16px",
+						"letterSpacing" : "0.05em",
+						"fontWeight" : "500"
+					} ],
+					"body-md" : [ "14px", {
+						"lineHeight" : "20px",
+						"fontWeight" : "400"
+					} ]
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body
+	class="bg-background text-on-background font-body-md text-body-md flex h-screen overflow-hidden antialiased">
+	<!-- SideNavBar -->
+	<aside
+		class="fixed left-0 top-0 h-full w-sidebar-width z-50 bg-surface-container-high border-r border-outline-variant flex flex-col py-lg">
+		<div class="px-lg mb-xl flex items-center gap-md">
+			<div
+				class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+				<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+			</div>
+			<div>
+				<h1
+					class="font-headline-md text-headline-md font-bold text-on-surface">Commerce
+					Admin</h1>
+				<p class="font-caption text-caption text-on-surface-variant">Enterprise
+					Suite</p>
+			</div>
+		</div>
+		<nav class="flex-1 px-sm space-y-base overflow-y-auto">
+			<a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="dashboard">dashboard</span> <span
+				class="font-title-md text-title-md">Dashboard</span>
+			</a> <a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="inventory_2">inventory_2</span> <span
+				class="font-title-md text-title-md">Product</span>
+			</a>
+			<!-- Active Tab -->
+			<a
+				class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm border-l-4 border-primary scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="category">category</span> <span
+				class="font-title-md text-title-md">Category</span>
+			</a> <a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="shopping_cart">shopping_cart</span> <span
+				class="font-title-md text-title-md">Order</span>
+			</a> <a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="group">group</span> <span
+				class="font-title-md text-title-md">User</span>
+			</a>
+		</nav>
+		<div class="px-sm mt-auto">
+			<div class="h-px bg-outline-variant mx-md mb-sm"></div>
+			<a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg scale-98 active:scale-95 duration-200"
+				href="#"><span class="material-symbols-outlined"
+				data-icon="settings">settings</span><span
+				class="font-title-md text-title-md">Settings</span></a>
+		</div>
+	</aside>
+	<!-- Main Content Wrapper -->
+	<div class="flex-1 ml-sidebar-width flex flex-col h-screen relative">
+		<!-- TopNavBar -->
+		<header
+			class="w-full h-16 sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-lg">
+			<!-- Search -->
+			<div class="flex-1 max-w-md">
+				<div class="relative flex items-center">
+					<span
+						class="material-symbols-outlined absolute left-md text-outline"
+						data-icon="search">search</span> <input
+						class="w-full bg-surface pl-2xl pr-md py-sm rounded-full border border-outline-variant focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 font-body-md text-body-md text-on-surface transition-all"
+						placeholder="Tìm kiếm..." type="text">
+				</div>
+			</div>
+			<!-- Actions & Profile -->
+			<div class="flex items-center gap-md">
+				<button
+					class="p-sm text-on-surface-variant hover:bg-surface-container transition-colors rounded-full cursor-pointer active:opacity-80">
+					<span class="material-symbols-outlined" data-icon="help">help</span>
+				</button>
+				<button
+					class="p-sm text-on-surface-variant hover:bg-surface-container transition-colors rounded-full cursor-pointer active:opacity-80 relative">
+					<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+					<span
+						class="absolute top-sm right-sm w-2 h-2 bg-error rounded-full"></span>
+				</button>
+				<div class="h-8 w-px bg-outline-variant mx-sm"></div>
+				<button
+					class="flex items-center gap-sm cursor-pointer active:opacity-80 hover:bg-surface-container p-sm rounded-lg transition-colors">
+					<img alt="User avatar"
+						class="w-8 h-8 rounded-full object-cover border border-outline-variant"
+						data-alt="A small, professional headshot of an administrative user, suitable for a dashboard profile avatar. Clear lighting, neutral background, modern corporate style."
+						src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYaOMS8YV0Dn38lHDAMVs7L8AHtsXG3pD_q1K077UF0_RKPt5ReGXDY6SWZt592HYLgrjDB6iqjPMp1R1LR3cNCTzmDkvIZZoPJ6SPZzFyd_L_udnynIPCwNY1xGdM1IlSpAICptI95cTBxkUjMFFEw0_RA6HmYYb2mTgJ4OOoZ91xroS-jIta8eATX7ySYHMwezqQTJKuVgeKT4rO7ia2OWT-AezFN2FHkKZgE9YB_YnpIWivCAc1">
+					<span
+						class="font-title-md text-title-md text-on-surface hidden md:block">Admin
+						User</span> <span
+						class="material-symbols-outlined text-on-surface-variant"
+						data-icon="arrow_drop_down">arrow_drop_down</span>
+				</button>
+			</div>
+		</header>
+		<!-- Main Canvas -->
+		<main class="flex-1 overflow-y-auto p-lg bg-background">
+			<!-- Page Header -->
+			<div class="flex items-center justify-between mb-xl">
+				<div>
+					<h2 class="font-headline-lg text-headline-lg text-on-surface">Chỉnh
+						sửa danh mục</h2>
+					<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Tạo
+						danh mục sản phẩm mới cho hệ thống cửa hàng.</p>
+				</div>
+				<a th:href="@{/admin/category}"
+					class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md px-md py-sm rounded-lg hover:bg-surface-container">
+
+					<span class="material-symbols-outlined"> arrow_back </span> Quay
+					lại danh sách
+
+				</a>
+			</div>
+			<!-- Form Card -->
+			<form th:action="@{/admin/category/update}"
+				th:object="${categoryDto}" method="post"
+				enctype="multipart/form-data" class="space-y-xl">
+
+				<!-- Hình đại diện -->
+				<div class="space-y-sm">
+
+					<label class="block font-title-md text-title-md text-on-surface">
+						Hình đại diện </label> <label for="imageFile"
+						class="w-full bg-surface border-2 border-dashed border-outline-variant rounded-xl p-lg flex flex-col items-center justify-center gap-sm cursor-pointer hover:bg-surface-container transition-all group">
+
+						<!-- Ảnh xem trước --> <img id="preview"
+						class="hidden w-40 h-40 object-cover rounded-lg border border-outline-variant mb-sm">
+
+						<!-- Icon upload --> <span id="uploadIcon"
+						class="material-symbols-outlined text-outline text-5xl group-hover:text-primary transition-colors">
+							add_photo_alternate </span>
+
+						<div id="uploadText" class="text-center">
+							<p class="font-body-md text-body-md text-on-surface">Nhấp để
+								tải lên hoặc kéo thả hình ảnh vào đây</p>
+
+							<p class="font-caption text-caption text-outline mt-xs">PNG,
+								JPG hoặc GIF (Tối đa 2MB)</p>
+						</div> <input type="file" id="imageFile" name="avatarFile"
+						class="hidden" accept="image/*">
+
+					</label>
+
+				</div>
+
+				<!-- Category ID -->
+				<div class="space-y-sm">
+					<label for="id"
+						class="block font-title-md text-title-md text-on-surface">
+						Category ID </label> <input type="text" name="id"
+						th:value="${category.id}" readonly
+						class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface">
+				</div>
+
+				<!-- Ảnh hiện tại 
+				<div class="space-y-sm">
+					<label class="block font-title-md text-title-md text-on-surface">
+						Hình đại diện </label>
+
+					<div th:if="${category.avatar != null}">
+						<img th:src="@{'/UploadFiles/' + *{category.avatar}}" alt="Category Image"
+							class="w-40 h-40 rounded-lg object-cover border border-outline-variant mb-4">
+					</div>
+
+					<input type="file" name="avatarFile" accept="image/*"
+						class="w-full border border-outline-variant rounded-lg px-md py-sm">
+				</div>
+				
+				-->
+
+
+				<!-- Tên danh mục -->
+				<div class="space-y-sm">
+					<label for="name"
+						class="block font-title-md text-title-md text-on-surface">
+						Tên danh mục <span class="text-error">*</span>
+					</label> <input id="name" th:field="*{name}" type="text"
+						placeholder="Nhập tên danh mục..."
+						class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm">
+
+					<small class="text-error" th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}"> </small>
+				</div>
+
+
+				<!-- Danh mục cha -->
+				<div class="space-y-sm">
+
+					<label for="categoryId"
+						class="block font-title-md text-title-md text-on-surface">
+						Danh mục cha </label> <select id="categoryId" th:field="*{categoryId}"
+						class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
+
+						<option value="">-- Không có danh mục cha --</option>
+
+						<option th:each="category : ${categories}"
+							th:value="${category.id}" th:text="${category.name}"></option>
+
+					</select>
+
+				</div>
+
+				<!-- Mô tả -->
+				<div class="space-y-sm">
+					<label for="description"
+						class="block font-title-md text-title-md text-on-surface">
+						Mô tả </label>
+
+					<textarea id="description" th:field="*{description}" rows="4"
+						placeholder="Nhập mô tả danh mục..."
+						class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm">
+        </textarea>
+				</div>
+
+				<!-- Trạng thái -->
+				<div class="space-y-md">
+					<label class="block font-title-md text-title-md text-on-surface">
+						Trạng thái </label>
+
+					<div class="flex items-center gap-xl">
+
+						<label class="flex items-center gap-sm"> <input
+							type="radio" th:field="*{status}" value="true"> <span>Hoạt
+								động</span>
+						</label> <label class="flex items-center gap-sm"> <input
+							type="radio" th:field="*{status}" value="false"> <span>Tạm
+								khóa</span>
+						</label>
+
+					</div>
+				</div>
+				<div class="h-px w-full bg-outline-variant"></div>
+
+				<!-- Button -->
+				<div class="flex justify-end gap-md">
+
+					<a th:href="@{/admin/category}"
+						class="px-xl py-sm rounded-lg border border-outline text-on-surface-variant">
+						Hủy </a>
+
+					<button type="submit"
+						class="px-xl py-sm rounded-lg bg-primary text-white">Cập
+						nhật danh mục</button>
+
+				</div>
+
+			</form>
+		</main>
+	</div>
+
+
+</body>
+</html>

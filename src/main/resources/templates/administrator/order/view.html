@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi" style="">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Quản lý đơn hàng - Admin Dashboard</title>
+<script
+	src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"
+	rel="stylesheet">
+<style type="text/tailwindcss">
+        @layer utilities {
+            .material-symbols-outlined {
+                font-family: 'Material Symbols Outlined';
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-feature-settings: 'liga';
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+	tailwind.config = {
+		darkMode : "class",
+		theme : {
+			extend : {
+				"colors" : {
+					"tertiary-fixed" : "#ffdbd0",
+					"primary-fixed" : "#dae1ff",
+					"background" : "#f8f9ff",
+					"primary" : "#0050cb",
+					"on-secondary" : "#ffffff",
+					"on-surface-variant" : "#424656",
+					"primary-fixed-dim" : "#b3c5ff",
+					"surface-tint" : "#0054d6",
+					"surface-dim" : "#cbdbf5",
+					"on-secondary-container" : "#fefcff",
+					"surface-container" : "#e5eeff",
+					"tertiary-fixed-dim" : "#ffb59d",
+					"on-tertiary" : "#ffffff",
+					"on-background" : "#0b1c30",
+					"inverse-on-surface" : "#eaf1ff",
+					"on-secondary-fixed" : "#001848",
+					"on-error" : "#ffffff",
+					"surface" : "#f8f9ff",
+					"on-tertiary-fixed-variant" : "#832600",
+					"on-surface" : "#0b1c30",
+					"secondary-fixed" : "#dae2ff",
+					"surface-container-high" : "#dce9ff",
+					"on-primary" : "#ffffff",
+					"inverse-primary" : "#b3c5ff",
+					"error-container" : "#ffdad6",
+					"outline-variant" : "#c2c6d8",
+					"secondary-container" : "#356ee7",
+					"surface-container-highest" : "#d3e4fe",
+					"primary-container" : "#0066ff",
+					"on-tertiary-fixed" : "#390c00",
+					"tertiary" : "#a33200",
+					"secondary" : "#0453cd",
+					"on-primary-fixed" : "#001849",
+					"on-primary-container" : "#f8f7ff",
+					"on-error-container" : "#93000a",
+					"on-secondary-fixed-variant" : "#0040a2",
+					"surface-container-low" : "#eff4ff",
+					"surface-container-lowest" : "#ffffff",
+					"inverse-surface" : "#213145",
+					"surface-variant" : "#d3e4fe",
+					"on-primary-fixed-variant" : "#003fa4",
+					"surface-bright" : "#f8f9ff",
+					"on-tertiary-container" : "#fff6f4",
+					"outline" : "#727687",
+					"secondary-fixed-dim" : "#b2c5ff",
+					"tertiary-container" : "#cc4204",
+					"error" : "#ba1a1a"
+				},
+				"borderRadius" : {
+					"DEFAULT" : "0.25rem",
+					"lg" : "0.5rem",
+					"xl" : "0.75rem",
+					"full" : "9999px"
+				},
+				"spacing" : {
+					"container-max-width" : "1440px",
+					"xs" : "4px",
+					"sm" : "8px",
+					"lg" : "24px",
+					"sidebar-width" : "260px",
+					"2xl" : "48px",
+					"base" : "4px",
+					"xl" : "32px",
+					"md" : "16px",
+					"gutter" : "24px"
+				},
+				"fontFamily" : {
+					"headline-lg" : [ "Inter" ],
+					"body-lg" : [ "Inter" ],
+					"label-md" : [ "Inter" ],
+					"headline-md" : [ "Inter" ],
+					"title-lg" : [ "Inter" ],
+					"caption" : [ "Inter" ],
+					"body-md" : [ "Inter" ],
+					"display" : [ "Inter" ],
+					"title-md" : [ "Inter" ]
+				},
+				"fontSize" : {
+					"headline-lg" : [ "24px", {
+						"lineHeight" : "32px",
+						"letterSpacing" : "-0.01em",
+						"fontWeight" : "600"
+					} ],
+					"body-lg" : [ "16px", {
+						"lineHeight" : "24px",
+						"fontWeight" : "400"
+					} ],
+					"label-md" : [ "12px", {
+						"lineHeight" : "16px",
+						"letterSpacing" : "0.05em",
+						"fontWeight" : "500"
+					} ],
+					"headline-md" : [ "20px", {
+						"lineHeight" : "28px",
+						"fontWeight" : "600"
+					} ],
+					"title-lg" : [ "18px", {
+						"lineHeight" : "26px",
+						"fontWeight" : "600"
+					} ],
+					"caption" : [ "12px", {
+						"lineHeight" : "16px",
+						"fontWeight" : "400"
+					} ],
+					"body-md" : [ "14px", {
+						"lineHeight" : "20px",
+						"fontWeight" : "400"
+					} ],
+					"display" : [ "30px", {
+						"lineHeight" : "38px",
+						"letterSpacing" : "-0.02em",
+						"fontWeight" : "700"
+					} ],
+					"title-md" : [ "16px", {
+						"lineHeight" : "24px",
+						"fontWeight" : "600"
+					} ]
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body
+	class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex">
+	<!-- SideNavBar Component -->
+	<aside
+		class="fixed left-0 top-0 h-full w-sidebar-width z-50 bg-surface-container-high border-r border-outline-variant flex flex-col h-full py-lg">
+		<div class="px-lg mb-lg">
+			<div class="flex items-center gap-md">
+				<div
+					class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+					<span class="material-symbols-outlined text-on-primary-container"
+						style="font-variation-settings: 'FILL' 1;">storefront</span>
+				</div>
+				<div>
+					<h1
+						class="font-headline-md text-headline-md font-bold text-on-surface">Commerce
+						Admin</h1>
+					<p class="font-caption text-caption text-on-surface-variant">Enterprise
+						Suite</p>
+				</div>
+			</div>
+		</div>
+		<nav class="flex-1 px-md flex flex-col gap-xs mt-md">
+			<!-- Dashboard -->
+			<a th:href="@{/admin}"
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="dashboard">dashboard</span> <span
+				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Dashboard</span>
+			</a>
+			<!-- Product Management -->
+			<a th:href="@{/admin/product}"
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="inventory_2">inventory_2</span> <span
+				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Product</span>
+			</a>
+			<!-- Category Management (Active) -->
+			<a th:href="@{/admin/category}"
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"><span class="material-symbols-outlined"
+				data-icon="category">category</span><span
+				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Category</span></a>
+			<!-- Order Management -->
+			<a th:href="@{/admin/order}"
+				class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm border-l-4 border-primary hover:bg-surface-container-highest transition-all cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"><span class="material-symbols-outlined"
+				data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span><span
+				class="font-title-md text-title-md font-bold whitespace-nowrap overflow-hidden truncate">Order</span></a>
+			<!-- User Management -->
+			<a th:href="@{/admin/user}"
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="group">group</span> <span
+				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">User</span>
+			</a>
+		</nav>
+		<div class="px-md mt-auto">
+			<!-- Settings -->
+			<a
+				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
+				href="#"> <span class="material-symbols-outlined"
+				data-icon="settings">settings</span> <span
+				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Settings</span>
+			</a>
+		</div>
+	</aside>
+	<!-- Main Content Area -->
+	<main class="flex-1 ml-[260px] flex flex-col min-h-screen">
+		<!-- TopNavBar Component -->
+		<header
+			class="w-full h-16 sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-lg w-full">
+			<div class="flex items-center w-full max-w-md">
+				<div class="relative w-full">
+					<span
+						class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+					<input
+						class="w-full h-10 pl-10 pr-4 rounded-full bg-surface text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md transition-shadow"
+						placeholder="Tìm kiếm..." type="text">
+				</div>
+			</div>
+			<div class="flex items-center gap-md">
+				<button
+					class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors cursor-pointer active:opacity-80">
+					<span class="material-symbols-outlined" data-icon="help">help</span>
+				</button>
+				<button
+					class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors cursor-pointer active:opacity-80 relative">
+					<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+					<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+				</button>
+				<div class="h-8 w-px bg-outline-variant mx-xs"></div>
+				<div
+					class="flex items-center gap-sm cursor-pointer hover:bg-surface-container p-1 rounded-lg transition-colors group">
+					<div
+						class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+						<img alt="User avatar" class="w-full h-full object-cover"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYaOMS8YV0Dn38lHDAMVs7L8AHtsXG3pD_q1K077UF0_RKPt5ReGXDY6SWZt592HYLgrjDB6iqjPMp1R1LR3cNCTzmDkvIZZoPJ6SPZzFyd_L_udnynIPCwNY1xGdM1IlSpAICptI95cTBxkUjMFFEw0_RA6HmYYb2mTgJ4OOoZ91xroS-jIta8eATX7ySYHMwezqQTJKuVgeKT4rO7ia2OWT-AezFN2FHkKZgE9YB_YnpIWivCAc1">
+					</div>
+					<div class="flex flex-col">
+						<span class="font-title-md text-title-md text-on-surface">Admin
+							User</span>
+					</div>
+					<span
+						class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">arrow_drop_down</span>
+				</div>
+			</div>
+		</header>
+		<!-- Page Canvas -->
+		<div
+			class="p-lg max-w-[container-max-width] mx-auto w-full flex-1 flex flex-col gap-lg">
+			<!-- Page Header -->
+			<div
+				class="flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+				<div>
+					<h2 class="font-display text-display text-on-background">Chỉnh
+						sửa đơn hàng</h2>
+					<p class="font-body-md text-body-md text-on-surface-variant mt-1">Cập
+						nhật thông tin đơn hàng.</p>
+				</div>
+				<a th:href="@{/admin/order}"
+					class="inline-flex items-center gap-sm px-md py-sm rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all font-title-md text-title-md shadow-sm shrink-0"
+					href="#"><span class="material-symbols-outlined text-[20px]">arrow_back</span><span
+					class="">Quay lại đơn hàng</span></a>
+			</div>
+			<!-- Statistics Row (Bento/Cards) -->
+			<!-- Table Section Container -->
+			<div
+				class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-lg flex flex-col">
+				<form class="space-y-6">
+
+					<!-- Order ID -->
+					<div>
+						<label class="block font-medium mb-2">Order ID</label>
+						<div class="w-full p-3 border rounded-lg bg-gray-100"
+							th:text="${order.id}"></div>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+
+						<!-- Khách hàng -->
+						<div>
+							<label class="block font-medium mb-2">Khách hàng</label>
+							<div class="w-full p-3 border rounded-lg bg-gray-100"
+								th:text="${order.user.username}"></div>
+						</div>
+
+						<!-- Ngày đặt -->
+						<div>
+							<label class="block font-medium mb-2">Ngày đặt hàng</label>
+							<div class="w-full p-3 border rounded-lg bg-gray-100"
+								th:text="${order.orderDate}"></div>
+						</div>
+
+						<!-- Tổng tiền -->
+						<div>
+							<label class="block font-medium mb-2">Tổng tiền</label>
+							<div class="w-full p-3 border rounded-lg bg-gray-100"
+								th:text="${order.totalAmount}"></div>
+						</div>
+
+						<!-- Thanh toán -->
+						<div>
+							<label class="block font-medium mb-2">Phương thức thanh
+								toán</label>
+							<div class="w-full p-3 border rounded-lg bg-gray-100"
+								th:text="${order.paymentMethod}"></div>
+						</div>
+
+						<!-- Trạng thái -->
+						<div>
+							<label class="block font-medium mb-2">Trạng thái</label>
+							<div class="w-full p-3 border rounded-lg bg-gray-100"
+								th:text="${order.status}"></div>
+						</div>
+
+						<!-- Địa chỉ -->
+						<div class="md:col-span-2">
+							<label class="block font-medium mb-2">Địa chỉ giao hàng</label>
+							<div
+								class="w-full p-3 border rounded-lg bg-gray-100 min-h-[80px]"
+								th:text="${order.shippingAddress}"></div>
+						</div>
+
+						<!-- Ghi chú -->
+						<div class="md:col-span-2">
+							<label class="block font-medium mb-2">Ghi chú</label>
+							<div
+								class="w-full p-3 border rounded-lg bg-gray-100 min-h-[80px]"
+								th:text="${order.note}"></div>
+						</div>
+
+					</div>
+
+					<div class="flex justify-end gap-3">
+
+						<a th:href="@{/admin/order}"
+							class="px-4 py-2 bg-gray-300 rounded-lg"> Quay lại </a> <a
+							th:href="@{/admin/order/edit(id=${order.id})}"
+							class="px-4 py-2 bg-blue-600 text-white rounded-lg"> Chỉnh
+							sửa </a>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</main>
+
+
+</body>
+</html>

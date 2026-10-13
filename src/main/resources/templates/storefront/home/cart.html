@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html lang="vi" style="">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Wolf Store - Công Nghệ &amp; Thiết Bị Thông Minh</title>
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+	rel="stylesheet" />
+<style>
+@layer base {html , body { margin:0;
+	padding: 0;
+	font-family: 'Inter', sans-serif;
+}
+
+body {
+	overscroll-behavior: none;
+}
+
+}
+::-webkit-scrollbar {
+	display: none;
+}
+
+.material-symbols-outlined.fill-icon {
+	font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+</style>
+<script
+	src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-container": "#eeefff",
+          "background": "#faf8ff",
+          "surface-variant": "#dae2fd",
+          "tertiary-fixed-dim": "#ffb4ab",
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#d2d9f4",
+          "secondary": "#006c4a",
+          "secondary-fixed": "#85f8c4",
+          "inverse-primary": "#b4c5ff",
+          "on-tertiary-fixed-variant": "#93000b",
+          "surface-container-high": "#e2e7ff",
+          "on-secondary": "#ffffff",
+          "on-secondary-container": "#00714e",
+          "on-primary": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "tertiary-fixed": "#ffdad6",
+          "inverse-surface": "#283044",
+          "primary-fixed-dim": "#b4c5ff",
+          "surface-bright": "#faf8ff",
+          "on-background": "#131b2e",
+          "on-tertiary-fixed": "#410002",
+          "surface-container-low": "#f2f3ff",
+          "error-container": "#ffdad6",
+          "secondary-container": "#82f5c1",
+          "primary-fixed": "#dbe1ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "outline": "#737686",
+          "on-surface-variant": "#434655",
+          "on-primary-fixed": "#00174b",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary": "#ae0010",
+          "error": "#ba1a1a",
+          "tertiary-container": "#d52022",
+          "outline-variant": "#c3c6d7",
+          "surface-container-highest": "#dae2fd",
+          "on-secondary-fixed-variant": "#005137",
+          "secondary-fixed-dim": "#68dba9",
+          "on-error-container": "#93000a",
+          "on-tertiary-container": "#ffecea",
+          "on-surface": "#131b2e",
+          "surface-tint": "#0053db",
+          "surface-container": "#eaedff",
+          "on-secondary-fixed": "#002114",
+          "inverse-on-surface": "#eef0ff",
+          "surface": "#faf8ff",
+          "on-error": "#ffffff",
+          brand: {
+            50: '#f0fdf4',
+            100: '#dcfce7',
+            500: '#22c55e',
+            600: '#059669',
+            700: '#047857',
+            800: '#065f46',
+            900: '#064e3b'
+          }
+        },
+        borderRadius: {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        spacing: {
+          "gutter-md": "1.25rem",
+          "space-xl": "2.5rem",
+          "margin-lg": "2rem",
+          "space-xs": "0.25rem",
+          "gutter": "1rem",
+          "space-lg": "1.5rem",
+          "gutter-lg": "1.5rem",
+          "margin": "1rem",
+          "margin-md": "1.5rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem"
+        },
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+          "body-lg": ['Inter'],
+          "headline-lg-mobile": ['Inter'],
+          "label-sm": ['Inter'],
+          "body-md": ['Inter'],
+          "price-hero": ['Inter'],
+          "headline-lg": ['Inter'],
+          "price-card": ['Inter'],
+          "display": ['Inter'],
+          "headline-md": ['Inter'],
+          "body-sm": ['Inter'],
+          "label-md": ['Inter'],
+          "badge-caption": ['Inter'],
+          "headline-sm": ['Inter']
+        }
+      }
+    }
+  };
+</script>
+<meta content="web_standard" name="shell-type" />
+</head>
+<body
+	class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+	<!-- HEADER -->
+	<header
+		class="w-full bg-white border-b border-slate-100 sticky top-0 z-50">
+		<div
+			class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+			<!-- Left: Logo -->
+			<a class="flex items-center gap-3 shrink-0 cursor-pointer" href="#">
+				<div
+					class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-extrabold text-xl shadow-sm">
+					W</div>
+				<div class="flex flex-col">
+					<span
+						class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">
+						WOLF<span class="text-emerald-700">STORE</span>
+					</span> <span
+						class="text-[10px] font-semibold text-slate-400 tracking-widest uppercase mt-0.5">Smart
+						Tech &amp; Audio</span>
+				</div>
+			</a>
+			<!-- Center Navigation Links -->
+			<nav
+				class="hidden md:flex items-center gap-8 text-[15px] font-medium text-slate-600">
+				<a class="hover:text-emerald-700 transition-colors cursor-pointer"
+					th:href="@{/home}">Trang chủ</a> <a
+					class="hover:text-emerald-700 transition-colors cursor-pointer"
+					href="#products">Sản phẩm</a> <a
+					class="hover:text-emerald-700 transition-colors cursor-pointer"
+					href="#categories">Danh mục</a> <a
+					class="hover:text-emerald-700 transition-colors cursor-pointer"
+					href="#brands">Thương hiệu</a> <a
+					class="hover:text-emerald-700 transition-colors cursor-pointer"
+					href="#blog">Tin công nghệ</a> <a
+					class="hover:text-emerald-700 transition-colors flex items-center gap-1 text-amber-600 font-semibold cursor-pointer"
+					href="#"> <span class="">Giá sốc 🔥</span>
+				</a>
+			</nav>
+			<!-- Right Actions: Search, Wishlist, Cart, Login -->
+			<div class="flex items-center gap-5 sm:gap-6">
+				<button aria-label="Tìm kiếm"
+					class="text-slate-600 hover:text-emerald-700 transition-colors p-1 cursor-pointer"
+					type="button">
+					<span class="material-symbols-outlined text-[23px]">search</span>
+				</button>
+				<a aria-label="Danh sách yêu thích"
+					class="relative text-slate-600 hover:text-emerald-700 transition-colors p-1 cursor-pointer"
+					href="#wishlist"> <span
+					class="material-symbols-outlined text-[23px]">favorite_border</span>
+					<span
+					class="absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-emerald-700 text-white text-[10px] font-bold flex items-center justify-center transition-transform"
+					id="wishlist-badge">0</span>
+				</a> <a aria-label="Giỏ hàng"
+					class="relative text-slate-600 hover:text-emerald-700 transition-colors p-1.5 rounded-full hover:bg-slate-100 cursor-pointer"
+					href="#"><span class="material-symbols-outlined text-[23px]">shopping_bag</span><span
+					id="totalProducts" th:text="${totalProducts}"
+					class="absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-emerald-700 text-white text-[10px] font-bold flex items-center justify-center shadow-xs">
+				</span></a>
+				<div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+				<a
+					class="flex items-center gap-1.5 font-semibold text-[14px] text-slate-700 hover:text-emerald-700 transition-colors cursor-pointer"
+					href="#account"> <span
+					class="material-symbols-outlined text-[20px]">person_outline</span>
+					<span class="">Đăng nhập</span>
+				</a>
+			</div>
+		</div>
+	</header>
+	<!-- MAIN CONTENT SLOT -->
+	<main class="w-full bg-slate-50 min-h-[calc(100vh-80px)]">
+		<div class="flex flex-col w-full">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+				<!-- 1. Breadcrumb -->
+				<nav aria-label="Breadcrumb"
+					class="flex items-center gap-2 text-slate-500 mb-6 text-sm font-medium">
+					<a
+						class="hover:text-emerald-600 transition-colors flex items-center gap-1 cursor-pointer"
+						th:href="@{/home}"> <span
+						class="material-symbols-outlined text-[18px]">home</span> <span
+						class="">Trang chủ</span>
+					</a> <span class="material-symbols-outlined text-[16px] text-slate-400">chevron_right</span>
+					<span class="text-slate-900 font-semibold">Giỏ hàng</span>
+				</nav>
+				<!-- 2. Header Section -->
+				<div
+					class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-200/80">
+					<div class="flex items-center gap-3">
+						<h1
+							class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+							<span class="">Giỏ hàng của bạn</span>
+						</h1>
+						<span
+							class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 tracking-wide"
+							id="cart-item-count" th:text="${totalProduct + ' sản phẩm'}">
+							2 sản phẩm </span>
+					</div>
+					<div
+						class="flex items-center gap-2 text-xs sm:text-sm text-emerald-700 font-medium bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100">
+						<span
+							class="material-symbols-outlined text-[18px] text-emerald-600">verified_user</span>
+						<span class="">Miễn phí giao hàng tiêu chuẩn toàn quốc</span>
+					</div>
+				</div>
+				<!-- 3. Main Cart Grid (8 Cols Left, 4 Cols Right) -->
+				<div
+					class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+					<!-- Left Column: Cart Items List -->
+					<div class="lg:col-span-8 space-y-4">
+						<!-- Cart Table Header Bar -->
+						<div
+							class="bg-white rounded-xl px-5 py-3.5 border border-slate-200/80 shadow-sm flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-600">
+
+							<label class="flex items-center gap-3 cursor-pointer select-none">
+								<input checked
+								class="w-4 h-4 rounded border-slate-300 text-emerald-700 focus:ring-0 cursor-pointer"
+								id="select-all-checkbox" type="checkbox" /> <span
+								class="text-slate-800 font-bold" id="select-all-label"
+								th:text="'Chọn tất cả (' + ${totalProducts} + ' sản phẩm)'">
+									Chọn tất cả (0 sản phẩm) </span>
+							</label>
+
+							<div
+								class="hidden md:flex items-center gap-12 text-slate-500 font-medium">
+
+								<span class="w-28 text-center">Số lượng</span> <span
+									class="w-28 text-right">Thành tiền</span>
+
+								<button
+									class="hover:text-red-500 transition-colors cursor-pointer flex items-center gap-1 font-normal text-xs text-slate-400"
+									onclick="removeAllItems()" type="button">
+
+									<span class="material-symbols-outlined text-[16px]">
+										delete_sweep </span> <span>Xóa tất cả</span>
+								</button>
+							</div>
+						</div>
+						<!-- Product Card 1: Apple AirPods Pro 2 -->
+
+						<!-- Danh sach san pham trong gio hang -->
+						<article th:each="item : ${cartItems}"
+							th:id="'cart-item-' + ${item.id}" th:data-price="${item.price}"
+							class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow transition-shadow relative group">
+
+							<div
+								class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+
+								<!-- Thong tin san pham -->
+								<div class="flex items-center gap-5 flex-1 min-w-0">
+
+									<input type="checkbox" checked
+										class="item-checkbox w-4 h-4 rounded border-slate-300 text-emerald-700 focus:ring-0 cursor-pointer shrink-0"
+										th:data-item-id="'cart-item-' + ${item.id}"
+										th:data-qty-id="'qty-' + ${item.id}" />
+
+									<div
+										class="relative w-28 h-28 rounded-2xl bg-slate-50 border border-slate-200/80 p-2 flex items-center justify-center shrink-0 overflow-hidden shadow-xs cursor-pointer">
+
+										<img th:src="@{'/UploadFiles/' + ${item.avatar}}"
+											th:alt="${item.name}"
+											class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+									</div>
+
+									<div class="flex-1 min-w-0">
+										<h3
+											class="font-bold text-base sm:text-lg text-slate-900 leading-snug tracking-tight hover:text-emerald-700 cursor-pointer transition-colors"
+											th:text="${item.name}">Ten san pham</h3>
+									</div>
+
+								</div>
+
+								<!-- So luong, thanh tien va xoa san pham -->
+								<div
+									class="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-6 pt-3 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+
+									<div class="flex flex-col items-center">
+										<div
+											class="inline-flex items-center rounded-xl border border-slate-200 bg-slate-50/50 p-1">
+
+											<button type="button" aria-label="Giảm số lượng"
+												class="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-xs transition-all cursor-pointer"
+												th:onclick="'updateQty(' + ${item.id} + ', -1)'">
+												<span class="material-symbols-outlined text-[15px]">remove</span>
+											</button>
+
+											<input
+												class="w-9 text-center bg-transparent border-0 text-slate-900 font-semibold text-sm p-0 focus:ring-0"
+												th:id="'qty-' + ${item.id}" type="number" min="1" readonly
+												th:value="${item.quantity}" />
+
+											<button type="button" aria-label="Tăng số lượng"
+												class="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-xs transition-all cursor-pointer"
+												th:onclick="'updateQty(' + ${item.id} + ', 1)'">
+												<span class="material-symbols-outlined text-[15px]">add</span>
+											</button>
+
+										</div>
+									</div>
+
+									<div class="flex flex-col items-end min-w-[120px]">
+										<span
+											class="font-extrabold text-emerald-700 text-lg sm:text-xl tracking-tight"
+											th:id="'item-total-' + ${item.id}"
+											th:text="${#numbers.formatDecimal(item.totalPrice, 0, 'COMMA', 0, 'POINT')} + '₫'">
+											0₫ </span>
+									</div>
+
+
+									<div class="flex items-center gap-1">
+										<button type="button" aria-label="Xóa sản phẩm"
+											class="text-slate-400 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 cursor-pointer"
+											th:onclick="|removeItem(${item.id})|">
+											<span class="material-symbols-outlined text-[19px]">delete</span>
+										</button>
+									</div>
+
+								</div>
+							</div>
+						</article>
+						<!-- Utility Buttons -->
+						<div
+							class="flex flex-wrap items-center justify-between gap-4 pt-3">
+							<a
+								class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-emerald-700 transition-colors cursor-pointer group"
+								th:href="@{/home}"><span
+								class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+								<span class="">Tiếp tục mua sắm</span> </a>
+							<button
+								class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200/90 rounded-xl px-4 py-2.5 transition-all shadow-xs cursor-pointer active:scale-95"
+								onclick="refreshCartNotification()" type="button">
+								<span class="material-symbols-outlined text-[18px]">sync</span>
+								<span class="">Cập nhật giỏ hàng</span>
+							</button>
+						</div>
+						<!-- Express Delivery Service Banner -->
+					</div>
+					<!-- Right Column: Order Summary Card (Sticky) -->
+					<aside class="lg:col-span-4 sticky top-24">
+						<div
+							class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-5">
+
+							<div
+								class="flex items-center justify-between pb-3 border-b border-slate-100">
+								<h2 class="text-lg font-bold text-slate-900">Tóm tắt đơn
+									hàng</h2>
+								<span class="text-xs text-slate-400 font-medium"> Bảo đảm
+									chính hãng </span>
+							</div>
+
+							<!-- Breakdown Cost -->
+							<div class="space-y-3 text-sm">
+
+								<!-- Subtotal -->
+								<div class="flex items-center justify-between text-slate-600">
+									<span>Tạm tính</span> <span
+										class="font-semibold text-slate-900" id="subtotal-display"
+										th:text="${#numbers.formatDecimal(subtotal, 0, 'COMMA', 0, 'POINT') + '₫'}">0₫</span>
+								</div>
+
+								<!-- Shipping Fee -->
+								<div class="flex items-center justify-between text-slate-600">
+									<span class="flex items-center gap-1"> <span>Phí
+											vận chuyển</span> <span
+										class="material-symbols-outlined text-slate-400 text-[14px]"
+										title="Miễn phí cho đơn hàng trên 500.000₫"> info </span>
+									</span> <span
+										class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-700">
+										Miễn phí </span>
+								</div>
+							</div>
+
+							<!-- Grand Total -->
+							<div class="border-t border-slate-100 pt-4">
+								<div class="flex items-baseline justify-between mb-1">
+									<span class="text-sm font-semibold text-slate-900"> Tổng
+										thanh toán </span> <span
+										class="text-2xl font-extrabold text-slate-900 tracking-tight"
+										id="grand-total-display"
+										th:text="${#numbers.formatDecimal(grandTotal, 0, 'COMMA', 0, 'POINT') + '₫'}">0₫</span>
+								</div>
+
+								<p class="text-[11px] text-slate-400 text-right">(Đã bao gồm
+									VAT và các khoản phụ phí)</p>
+							</div>
+
+							<!-- Primary CTA Button -->
+
+							<a th:href="@{/checkout}"
+								class="w-full py-4 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-600/20 active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2 group">
+								<span>Thanh toán ngay</span> <span
+								class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">
+									arrow_forward </span>
+							</a>
+
+
+							<!-- Safe Commitments -->
+							<div
+								class="pt-2 border-t border-slate-100 space-y-2.5 text-xs text-slate-500">
+
+								<div class="flex items-center gap-2">
+									<span
+										class="material-symbols-outlined text-emerald-600 text-[18px]">
+										verified </span> <span> Bảo mật thông tin thanh toán chuẩn SSL
+										256-bit </span>
+								</div>
+
+								<div class="flex items-center gap-2">
+									<span
+										class="material-symbols-outlined text-emerald-600 text-[18px]">
+										published_with_changes </span> <span> Đổi trả 1-đổi-1 trong 30
+										ngày nếu lỗi kỹ thuật </span>
+								</div>
+
+								<div class="flex items-center gap-2">
+									<span
+										class="material-symbols-outlined text-emerald-600 text-[18px]">
+										account_balance_wallet </span> <span> Hỗ trợ VNPAY, MoMo, thẻ
+										Visa/Mastercard, trả góp 0% </span>
+								</div>
+							</div>
+						</div>
+					</aside>
+
+				</div>
+				<!-- 4. Section: Có thể bạn cũng thích (Cross-sell 4 Items) -->
+				<!-- 4. Section: Có thể bạn cũng thích (Cross-sell 4 Items) -->
+
+				<section class="mt-8 pt-8 border-t border-slate-200/80">
+					<div class="flex items-center justify-between mb-6">
+						<div>
+							<h2
+								class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+								Có thể bạn cũng thích</h2>
+							<p class="text-xs sm:text-sm text-slate-500 mt-0.5">Sản phẩm
+								công nghệ phối ghép hoàn hảo với lựa chọn của bạn</p>
+						</div>
+
+						<a
+							class="text-xs sm:text-sm font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 cursor-pointer"
+							href="#products"> <span class="">Xem tất cả</span> <span
+							class="material-symbols-outlined text-[16px]">chevron_right</span>
+						</a>
+					</div>
+
+					<!-- 4 Standard Responsive Product Cards -->
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+						<!-- Product Card -->
+						<article th:each="product : ${relatedProducts}"
+							class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+
+							<div>
+								<div
+									class="relative w-full aspect-square rounded-xl bg-slate-50 p-4 flex items-center justify-center overflow-hidden mb-3">
+
+									<span
+										th:if="${product.discountPercent != null and product.discountPercent > 0}"
+										th:text="'-' + ${product.discountPercent} + '%'"
+										class="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-100">
+										-12% </span> <img th:src="@{'/UploadFiles/' + ${product.avatar}}"
+										th:alt="${product.name}"
+										class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+								</div>
+
+								<div class="flex items-center gap-1 text-amber-500 mb-1.5">
+									<div class="flex items-center">
+										<span class="material-symbols-outlined text-[15px] fill-icon">star</span>
+										<span class="material-symbols-outlined text-[15px] fill-icon">star</span>
+										<span class="material-symbols-outlined text-[15px] fill-icon">star</span>
+										<span class="material-symbols-outlined text-[15px] fill-icon">star</span>
+										<span class="material-symbols-outlined text-[15px] fill-icon">star</span>
+									</div>
+								</div>
+
+								<h3
+									class="font-semibold text-sm text-slate-900 group-hover:text-emerald-600 transition-colors line-clamp-2 leading-snug">
+									<a th:href="@{/product/{id}(id=${product.id})}"
+										th:text="${product.name}"> Tên sản phẩm </a>
+								</h3>
+							</div>
+
+							<div class="mt-4 pt-3 border-t border-slate-100">
+								<div class="flex items-baseline gap-2 mb-3">
+									<span class="text-base font-bold text-slate-900"
+										th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + '₫'}">
+										0₫ </span> <span
+										th:if="${product.oldPrice != null and product.price != null and product.oldPrice.compareTo(product.price) > 0}"
+										class="text-xs text-slate-400 line-through"
+										th:text="${#numbers.formatDecimal(product.oldPrice, 0, 'COMMA', 0, 'POINT') + '₫'}">
+										0₫ </span>
+								</div>
+
+
+
+								<button
+									class="w-full bg-slate-900 hover:bg-emerald-600 text-white rounded-xl py-2.5 px-3 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
+									type="button" th:data-id="${product.id}"
+									th:data-name="${product.name}" onclick="addToCart(this)">
+									<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+									<span>+ Thêm vào giỏ</span>
+								</button>
+
+							</div>
+						</article>
+
+					</div>
+				</section>
+
+			</div>
+			<!-- Interactive Logic -->
+			<script>
+			let prices = {};
+    let discount = 0;
+
+    function formatVND(val) {
+      return val.toLocaleString('vi-VN') + '₫';
+    }
+    
+    function loadPrices() {
+        document.querySelectorAll('.item-checkbox').forEach(cb => {
+            const qtyId = cb.getAttribute('data-qty-id');
+            const itemId = cb.getAttribute('data-item-id');
+            const item = document.getElementById(itemId);
+
+            if (qtyId && item) {
+                prices[qtyId] = Number(item.dataset.price) || 0;
+            }
+        });
+    }
+
+    function calculateTotal() {
+      let subtotal = 0;
+      const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+      
+      itemCheckboxes.forEach(cb => {
+        if (cb.checked) {
+          const qtyId = cb.getAttribute('data-qty-id');
+          const input = document.getElementById(qtyId);
+          if (input && prices[qtyId]) {
+            const qty = parseInt(input.value) || 0;
+            subtotal += qty * prices[qtyId];
+          }
+        }
+      });
+
+      const grandTotal = Math.max(0, subtotal - discount);
+      
+      const subtotalEl = document.getElementById('subtotal-display');
+      const grandTotalEl = document.getElementById('grand-total-display');
+      if (subtotalEl) subtotalEl.textContent = formatVND(subtotal);
+      if (grandTotalEl) grandTotalEl.textContent = formatVND(grandTotal);
+    }
+
+    function updateCheckboxStatus() {
+      const selectAll = document.getElementById('select-all-checkbox');
+      const selectAllLabel = document.getElementById('select-all-label');
+      const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+      
+      const totalItems = itemCheckboxes.length;
+      let checkedCount = 0;
+      
+      itemCheckboxes.forEach(cb => {
+        if (cb.checked) checkedCount++;
+      });
+      
+      if (selectAll) {
+        if (totalItems === 0) {
+          selectAll.checked = false;
+          selectAll.indeterminate = false;
+        } else {
+          selectAll.checked = (checkedCount === totalItems);
+          selectAll.indeterminate = (checkedCount > 0 && checkedCount < totalItems);
+        }
+      }
+      
+      if (selectAllLabel) {
+        selectAllLabel.textContent = `Chọn tất cả (${checkedCount}/${totalItems} sản phẩm)`;
+      }
+      
+      calculateTotal();
+    }
+
+    function setupCheckboxes() {
+      const selectAll = document.getElementById('select-all-checkbox');
+      const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+      
+      if (selectAll) {
+        selectAll.addEventListener('change', function() {
+          const isChecked = this.checked;
+          const currentItemCheckboxes = document.querySelectorAll('.item-checkbox');
+          currentItemCheckboxes.forEach(cb => {
+            cb.checked = isChecked;
+          });
+          updateCheckboxStatus();
+        });
+      }
+      
+      itemCheckboxes.forEach(cb => {
+    	    cb.addEventListener('change', function() {
+    	        // Khong tu dong tinh lai tong tien
+    	    });
+    	});
+    }
+
+
+
+    function updateQty(id, delta) {
+        const input = document.getElementById('qty-' + id);
+        if (!input) return;
+
+        input.value = Math.max(1, (parseInt(input.value) || 1) + delta);
+
+        const qtyId = 'qty-' + id;
+        const price = prices[qtyId] || 0;
+        const itemTotal = document.getElementById('item-total-' + id);
+
+        if (itemTotal) {
+            itemTotal.textContent = formatVND(price * Number(input.value));
+        }
+
+        calculateTotal();
+    }
+
+
+    function removeItem(productId) {
+        const item = document.getElementById('cart-item-' + productId);
+
+        fetch('/cart/remove?productId=' + productId, {
+            method: 'POST'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                if (item) {
+                    item.style.transition = 'all 0.3s ease-out';
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(-8px)';
+                }
+
+                setTimeout(() => {
+                    location.reload();
+                }, 300);
+            }
+        });
+    }
+
+    function removeAllItems() {
+      if (!confirm('Bạn có chắc chắn muốn xóa toàn bộ sản phẩm trong giỏ hàng?')) return;
+      const items = ['cart-item-1', 'cart-item-2'];
+      items.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+      prices = {};
+      const countEl = document.getElementById('cart-item-count');
+      if (countEl) countEl.textContent = '0 sản phẩm';
+      updateCheckboxStatus();
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('coupon-code')?.value.trim().toUpperCase();
+      const pill = document.getElementById('voucher-pill');
+      const discEl = document.getElementById('discount-display');
+      if (code === 'WOLFTECH') {
+        discount = 200000;
+        if (pill) pill.classList.remove('hidden');
+        if (discEl) discEl.textContent = '-200.000₫';
+      } else if (code && code.length > 0) {
+        alert('Mã giảm giá ' + code + ' không hợp lệ hoặc đã hết hạn.');
+      }
+      calculateTotal();
+    }
+
+    function removeCoupon() {
+      discount = 0;
+      const pill = document.getElementById('voucher-pill');
+      const discEl = document.getElementById('discount-display');
+      if (pill) pill.classList.add('hidden');
+      if (discEl) discEl.textContent = '0₫';
+      calculateTotal();
+    }
+
+    function refreshCartNotification() {
+      alert('Giỏ hàng đã được đồng bộ trạng thái mới nhất từ hệ thống.');
+    }
+
+
+
+    function addToCart(btn) {
+        const productId = btn.dataset.id;
+        const name = btn.dataset.name;
+        const quantity = 1;
+
+        fetch(
+            '/cart/add?productId=' + productId +
+            '&addQuantity=' + quantity +
+            '&name=' + encodeURIComponent(name),
+            {
+                method: 'POST'
+            }
+        )
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const totalProducts = document.getElementById('totalProducts');
+
+                if (totalProducts) {
+                    totalProducts.innerText = data.totalProducts;
+                }
+
+                alert('Đã thêm 1 sản phẩm "' + name + '" vào giỏ hàng!');
+                location.reload();
+            }
+        });
+    }
+ // Initialize checkbox listeners
+    document.addEventListener('DOMContentLoaded', function() {
+    loadPrices();
+    setupCheckboxes();
+    updateCheckboxStatus();
+});
+  </script>
+		</div>
+	</main>
+	<!-- FOOTER -->
+	<footer
+		class="bg-white border-t border-slate-200 mt-16 pt-10 pb-6 text-slate-600 text-xs">
+		<div class="max-w-7xl mx-auto px-4">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+				<div>
+					<div class="flex items-center gap-2 mb-3">
+						<div
+							class="w-7 h-7 rounded-lg bg-[#276646] text-white flex items-center justify-center font-bold text-sm">W</div>
+						<div>
+							<div class="font-extrabold text-slate-800 text-sm tracking-tight">
+								WOLF<span class="text-[#276646]">STORE</span>
+							</div>
+							<div
+								class="text-[9px] text-slate-400 font-semibold -mt-1 tracking-wider">SMART
+								TECH &amp; AUDIO</div>
+						</div>
+					</div>
+					<p class="text-slate-500 mb-3 leading-relaxed">Hệ thống bán lẻ
+						thiết bị công nghệ &amp; âm thanh chính hãng hàng đầu.</p>
+					<div
+						class="flex items-center gap-2 text-slate-700 font-medium mb-3">
+						<span class="material-symbols-outlined text-slate-400 text-sm">call</span>
+						Hotline: <span class="font-bold text-[#276646] text-sm">1800
+							6868</span> <span class="text-[10px] text-slate-400">(Miễn phí)</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<a
+							class="w-7 h-7 rounded-full bg-blue-50 text-[#1877F2] hover:bg-[#1877F2] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+							href="#"><svg class="w-3.5 h-3.5 fill-current"
+								viewbox="0 0 24 24">
+								<path
+									d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg></a><a
+							class="w-7 h-7 rounded-full bg-rose-50 text-[#FF0000] hover:bg-[#FF0000] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+							href="#"><svg class="w-3.5 h-3.5 fill-current"
+								viewbox="0 0 24 24">
+								<path
+									d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a
+							class="w-7 h-7 rounded-full bg-slate-100 text-slate-900 hover:bg-slate-900 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+							href="#"><svg class="w-3.5 h-3.5 fill-current"
+								viewbox="0 0 24 24">
+								<path
+									d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c-.01 2.37-1.14 4.67-3.05 6.01-1.92 1.34-4.47 1.66-6.66.86-2.2-.8-3.96-2.67-4.66-4.9-1.01-3.23.49-6.84 3.54-8.21.99-.44 2.08-.66 3.16-.64v4.06c-.9-.05-1.83.21-2.52.79-.69.58-1.07 1.47-1.02 2.37.05.9.52 1.74 1.28 2.22.76.48 1.73.57 2.57.24.84-.33 1.48-1.08 1.66-1.96.11-.53.11-1.08.11-1.62V.02z"></path></svg></a><a
+							class="w-7 h-7 rounded-full bg-blue-50 text-[#0068FF] hover:bg-[#0068FF] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm font-bold text-[10px]"
+							href="#">Zalo</a>
+					</div>
+				</div>
+				<div>
+					<div class="font-bold text-slate-800 text-sm mb-3">DANH MỤC
+						SẢN PHẨM</div>
+					<ul class="space-y-2">
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Điện thoại &amp; Tablet</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Laptop &amp; MacBook</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Màn hình &amp; PC Gaming</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Tai nghe &amp; Âm thanh</a></li>
+					</ul>
+				</div>
+				<div>
+					<div class="font-bold text-slate-800 text-sm mb-3">HỖ TRỢ
+						&amp; CHÍNH SÁCH</div>
+					<ul class="space-y-2">
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Tra cứu đơn hàng</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Bảo hành chính hãng</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Đổi trả 1 - 1 trong 30 ngày</a></li>
+						<li class=""><a
+							class="hover:text-[#276646] flex items-center gap-1 transition-colors cursor-pointer"
+							href="#"><span
+								class="material-symbols-outlined text-[13px] text-slate-400">chevron_right</span>
+								Giao hàng nhanh 2H</a></li>
+					</ul>
+				</div>
+				<div>
+					<div class="font-bold text-slate-800 text-sm mb-3">THÔNG TIN
+						LIÊN HỆ</div>
+					<div class="space-y-2 mb-3">
+						<div class="flex items-start gap-1.5">
+							<span
+								class="material-symbols-outlined text-slate-400 text-xs mt-0.5">location_on</span><span
+								class="">Showroom HCM: 123 Nguyễn Thị Minh Khai, Q.1</span>
+						</div>
+						<div class="flex items-start gap-1.5">
+							<span
+								class="material-symbols-outlined text-slate-400 text-xs mt-0.5">store</span><span
+								class="">Showroom HN: 45 Thái Hà, Q. Đống Đa</span>
+						</div>
+						<div class="flex items-start gap-1.5">
+							<span
+								class="material-symbols-outlined text-slate-400 text-xs mt-0.5">mail</span><span
+								class="">Email: cskh@wolfstore.vn</span>
+						</div>
+					</div>
+					<div class="flex items-center gap-1 mt-2">
+						<input
+							class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:border-[#276646] flex-1"
+							placeholder="Nhận voucher 100K..." type="email" />
+						<button
+							class="bg-[#276646] hover:bg-[#1f5338] text-white px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors"
+							type="button">Đăng ký</button>
+					</div>
+				</div>
+			</div>
+			<div
+				class="border-t border-slate-200/80 pt-4 flex flex-col md:flex-row items-center justify-between gap-3">
+				<div class="text-[11px] text-slate-400">© 2025 Wolf Store. Tất
+					cả quyền được bảo lưu.</div>
+				<div
+					class="flex items-center flex-wrap gap-2 text-[10px] text-slate-500 font-semibold">
+					<span class="">Thanh toán:</span><span
+						class="px-2 py-0.5 bg-slate-100 rounded border border-slate-200">VNPAY</span><span
+						class="px-2 py-0.5 bg-rose-50 text-rose-600 rounded border border-rose-100">MoMo</span><span
+						class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-200">ZaloPay</span><span
+						class="px-2 py-0.5 bg-slate-100 rounded border border-slate-200">VISA</span><span
+						class="px-2 py-0.5 bg-slate-100 rounded border border-slate-200">MasterCard</span><span
+						class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded border border-emerald-100">Trả
+						góp 0%</span>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
