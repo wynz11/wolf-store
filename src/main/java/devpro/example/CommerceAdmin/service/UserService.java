@@ -2,6 +2,7 @@ package devpro.example.CommerceAdmin.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import devpro.example.CommerceAdmin.model.User;
@@ -28,6 +29,18 @@ public class UserService {
 		return urp.findByUsername(username);
 	}
 	
+	public User findByUserNameAndStatus(String username, Boolean status) {
+		return urp.findByUsernameAndStatus(username, status).
+				orElseThrow(() ->
+		new UsernameNotFoundException("Username not found with username: " + username));
+	}
 	
+	public User create(User user) {
+		return urp.save(user);
+	}
+	
+	public boolean existsByUsername(String username) {
+	    return urp.existsByUsername(username);
+	}
 
 }

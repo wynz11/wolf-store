@@ -15,5 +15,7 @@ public interface SaleOrderRepository  extends JpaRepository<SaleOrder, Integer>,
 
 	Optional<SaleOrder> findById(Integer id);
 	
+	long countByOrderStatus_Name(String name);
+	
 	public List<SaleOrder> findAll();
 }

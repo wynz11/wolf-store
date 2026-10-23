@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script
+	src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Custom Configuration -->
+<script data-purpose="tailwind-config">
+	tailwind.config = {
+		theme : {
+			extend : {
+				colors : {
+					brand : {
+						blue : '#007bff',
+						'blue-hover' : '#0069d9',
+						input : '#edf3fa'
+					}
+				}
+			}
+		}
+	};
+</script>
+<!-- Custom Typography & Layout Overrides -->
+<style data-purpose="base-styling">
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+	color: #333333;
+	background-color: #ffffff;
+}
+</style>
+</head>
+<body
+	class="min-h-screen flex flex-col justify-between bg-white text-gray-700 antialiased">
+	<!-- BEGIN: MainContent -->
+	<main
+		class="w-full flex-grow flex items-center justify-center py-6 px-4 sm:px-8 lg:px-16"
+		data-purpose="login-container">
+		<div
+			class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16 items-center">
+			<!-- BEGIN: LeftBannerImage -->
+			<!-- Left side showcase image showing drawer flatlay -->
+			<div class="hidden md:block md:col-span-5 overflow-hidden"
+				data-purpose="side-visual">
+				<img alt="Desk and drawer organizer"
+					class="w-full h-[480px] object-cover object-left shadow-none"
+					src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7HtcGorQEgczoEyYW8_IzMZxjvZ7Ejfsi7PU4Y8RQ5CNyaBITPJmIDtKYU_hy4ysQlYAxTfXLLS9uZlE-Uqv8m1Q1lEKWRA6aKhfpV0bBZsHqSRFDJFZuFcxeYo_Ut2XaxyJj3_pHHwDa_pXooQsOxsfgA1-Wfo9gH2u07j2_zY864AJrVDHCcOx4Hy2--9u5xNpM-3KIb4FUwLtf_v0CtcCdARs1OyJOGefETf1xw3axn1Ia6vfT">
+			</div>
+			<!-- END: LeftBannerImage -->
+			<!-- BEGIN: LoginFormSection -->
+			<!-- Right side authentication form -->
+			<div
+				class="col-span-1 md:col-span-7 flex flex-col items-center justify-center px-4 sm:px-10"
+				data-purpose="auth-form-wrapper">
+				<div class="w-full max-w-md">
+					<!-- Heading -->
+					<h1 class="text-3xl font-semibold text-center text-gray-700 mb-8"
+						data-purpose="page-title">Login</h1>
+
+					<!-- Form Element -->
+					<form class="space-y-4" method="POST"
+						th:action="@{/login_processing_url}">
+						<!-- Username Input Group -->
+						<div class="flex flex-col space-y-1.5"
+							data-purpose="username-field">
+							<label class="text-sm text-gray-600 font-normal" for="username">
+								Username </label> <input
+								class="w-full px-3.5 py-2.5 bg-[#eef4fb] text-gray-800 border-none rounded focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm transition"
+								id="username" name="username" required="" type="text">
+						</div>
+						<!-- Password Input Group -->
+						<div class="flex flex-col space-y-1.5 pt-1"
+							data-purpose="password-field">
+							<label class="text-sm text-gray-600 font-normal" for="password">
+								Password </label> <input
+								class="w-full px-3.5 py-2.5 bg-[#eef4fb] text-gray-800 border-none rounded focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm transition"
+								id="password" name="password" required="" type="password">
+						</div>
+						<!-- Options: Remember Me & Forgot Password -->
+						<div
+							class="flex items-center justify-between text-xs sm:text-sm text-gray-600 pt-1.5"
+							data-purpose="form-auxiliary-actions">
+							<label
+								class="inline-flex items-center space-x-2 cursor-pointer select-none">
+								<input
+								class="rounded-full border-gray-300 text-blue-600 focus:ring-0 focus:ring-offset-0 h-4 w-4 bg-[#edf3fa]"
+								name="remember-me" type="checkbox"> <span
+								class="text-gray-500">Remember me</span>
+							</label> <a class="text-gray-600 hover:text-blue-600 transition-colors"
+								href="#"> Forgot password? </a>
+						</div>
+						<!-- Action Buttons: Login & Sign-up -->
+						<div class="flex items-center justify-center gap-3 pt-4"
+							data-purpose="button-group">
+							<button
+								class="px-5 py-1.5 bg-[#0d6efd] hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded shadow-none transition-colors duration-150"
+								type="submit">Login</button>
+							<a
+								class="px-5 py-1.5 bg-[#0d6efd] hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded shadow-none text-center transition-colors duration-150 inline-block"
+								th:href="@{/signup}">Sign-up</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- END: LoginFormSection -->
+		</div>
+	</main>
+	<!-- END: MainContent -->
+	<!-- BEGIN: MainFooter -->
+	<!-- Bottom multi-column navigation footer -->
+	<footer
+		class="w-full bg-[#f9fafb] border-t border-gray-200 mt-auto relative"
+		data-purpose="site-footer">
+		<div class="max-w-7xl mx-auto px-6 py-8">
+			<div
+				class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs text-gray-600">
+				<!-- Column 1: Về chúng tôi -->
+				<div data-purpose="footer-col-1">
+					<h3 class="font-bold text-gray-900 tracking-wider uppercase mb-3">VỀ
+						CHÚNG TÔI</h3>
+					<ul class="space-y-1.5">
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Giới thiệu thương hiệu</a></li>
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Hệ thống cửa hàng</a></li>
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Tuyển dụng</a></li>
+					</ul>
+				</div>
+				<!-- Column 2: Hỗ trợ khách hàng -->
+				<div data-purpose="footer-col-2">
+					<h3 class="font-bold text-gray-900 tracking-wider uppercase mb-3">HỖ
+						TRỢ KHÁCH HÀNG</h3>
+					<ul class="space-y-1.5">
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Chính sách đổi trả</a></li>
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Hướng dẫn mua hàng</a></li>
+						<li class=""><a class="hover:underline text-gray-500"
+							href="#">Phương thức vận chuyển</a></li>
+					</ul>
+				</div>
+				<!-- Column 3: Địa chỉ liên hệ -->
+				<div data-purpose="footer-col-3">
+					<h3 class="font-bold text-gray-900 tracking-wider uppercase mb-3">ĐỊA
+						CHỈ LIÊN HỆ</h3>
+					<ul class="space-y-1.5 text-gray-500">
+						<li class="">Hotline: 1900 xxxx</li>
+						<li class="">Email: support@example.com</li>
+						<li class="">Địa chỉ: TP. Hồ Chí Minh</li>
+					</ul>
+				</div>
+				<!-- Column 4: Đăng ký nhận tin -->
+				<div data-purpose="footer-col-4">
+					<h3 class="font-bold text-gray-900 tracking-wider uppercase mb-3">ĐĂNG
+						KÝ NHẬN TIN</h3>
+					<form class="flex flex-col space-y-2"
+						onsubmit="event.preventDefault();">
+						<input
+							class="px-2.5 py-1.5 border border-gray-300 rounded text-xs focus:ring-1 focus:ring-blue-500 focus:outline-none"
+							placeholder="Nhập email của bạn..." type="email">
+						<button
+							class="w-max px-3 py-1 bg-gray-800 text-white rounded text-xs hover:bg-black transition-colors"
+							type="submit">Gửi</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- BEGIN: ScrollToTopButton -->
+		<!-- Square black floating button at bottom-right corner -->
+		<button aria-label="Lên đầu trang"
+			class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-8 h-8 sm:w-9 sm:h-9 bg-black text-white flex items-center justify-center rounded-none shadow-md hover:bg-gray-800 transition"
+			data-purpose="back-to-top-button" id="scroll-to-top"
+			onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+			<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+<path clip-rule="evenodd"
+					d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+					fill-rule="evenodd"></path>
+</svg>
+		</button>
+		<!-- END: ScrollToTopButton -->
+	</footer>
+	<!-- END: MainFooter -->
+
+
+</body>
+</html>

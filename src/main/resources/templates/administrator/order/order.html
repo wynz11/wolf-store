@@ -189,27 +189,27 @@
 			<!-- Dashboard -->
 			<a
 				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
-				href="#"> <span class="material-symbols-outlined"
+				th:href="@{/admin}"> <span class="material-symbols-outlined"
 				data-icon="dashboard">dashboard</span> <span
 				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Dashboard</span>
 			</a>
 			<!-- Product Management -->
 			<a
 				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
-				href="#"> <span class="material-symbols-outlined"
+				th:href="@{/admin/product}"> <span class="material-symbols-outlined"
 				data-icon="inventory_2">inventory_2</span> <span
 				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Product</span>
 			</a>
 			<!-- Category Management (Active) -->
 			<a
 				class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer scale-98 active:scale-95 duration-200"
-				href="#"><span class="material-symbols-outlined"
+				th:href="@{/admin/category}"><span class="material-symbols-outlined"
 				data-icon="category">category</span><span
 				class="font-title-md text-title-md whitespace-nowrap overflow-hidden truncate">Category</span></a>
 			<!-- Order Management -->
 			<a
 				class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm border-l-4 border-primary hover:bg-surface-container-highest transition-all cursor-pointer scale-98 active:scale-95 duration-200"
-				href="#"><span class="material-symbols-outlined"
+				th:href="@{/admin/order}"><span class="material-symbols-outlined"
 				data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span><span
 				class="font-title-md text-title-md font-bold whitespace-nowrap overflow-hidden truncate">Order</span></a>
 			<!-- User Management -->
@@ -318,7 +318,7 @@
 					<div>
 						<p
 							class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">
-							Đang xử lý</p>
+							Chờ xác nhận</p>
 						<p class="font-headline-lg text-headline-lg text-on-surface"
 							th:text="${processingOrders}">0</p>
 					</div>
@@ -366,6 +366,8 @@
 					class="flex items-center gap-sm flex-wrap w-full">
 
 					<!-- Search -->
+
+
 					<div class="relative w-full max-w-sm">
 						<span
 							class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">
@@ -374,29 +376,23 @@
 							placeholder="Tìm mã đơn hàng, khách hàng..." type="text" />
 					</div>
 
+
+
 					<!-- Filter Status -->
-					<select name="status" onchange="this.form.submit()"
+
+					<select name="orderStatusId" onchange="this.form.submit()"
 						class="pl-4 pr-10 py-2 bg-surface text-on-surface border border-outline-variant rounded-lg">
 
-						<option value="" th:selected="${status == null or status == ''}">
+						<option value="" th:selected="${orderStatusId == null}">
 							Tất cả trạng thái</option>
 
-						<option value="pending" th:selected="${status == 'pending'}">
-							Chờ xác nhận</option>
-
-						<option value="processing" th:selected="${status == 'processing'}">
-							Đang xử lý</option>
-
-						<option value="shipping" th:selected="${status == 'shipping'}">
-							Đang giao</option>
-
-						<option value="completed" th:selected="${status == 'completed'}">
-							Đã giao</option>
-
-						<option value="cancelled" th:selected="${status == 'cancelled'}">
-							Đã hủy</option>
+						<option th:each="item : ${orderStatuses}" th:value="${item.id}"
+							th:text="${item.name}"
+							th:selected="${orderStatusId != null and orderStatusId == item.id}">
+						</option>
 
 					</select>
+
 
 					<!-- Button Search -->
 					<button type="submit"
@@ -410,97 +406,105 @@
 
 			</div>
 			<!-- Data Table -->
+
 			<div class="overflow-x-auto w-full">
 				<table class="w-full text-left border-collapse min-w-[800px]">
 					<thead>
 						<tr
 							class="bg-surface-container-low border-b border-outline-variant">
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">Mã
-								đơn hàng</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Mã đơn hàng</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">Khách
-								hàng</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Khách hàng</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">Ngày
-								đặt</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Code</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-right">Tổng
-								tiền</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Ngày đặt</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-center">Phương
-								thức thanh toán</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-right">
+								Tổng tiền</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-center">Trạng
-								thái</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Số điện thoại</th>
 							<th
-								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-right">Thao
-								tác</th>
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase">
+								Địa chỉ</th>
+							<th
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-center">
+								Trạng thái</th>
+							<th
+								class="py-3 px-md font-label-md text-label-md text-on-surface-variant uppercase text-right">
+								Thao tác</th>
 						</tr>
 					</thead>
+
 					<tbody
 						class="divide-y divide-outline-variant bg-surface-container-lowest">
 
 						<tr th:each="order : ${ordersPage.content}"
 							class="group hover:bg-surface transition-colors">
 
-							<!-- Mã đơn hàng -->
+							<!-- Ma don hang -->
 							<td class="py-3 px-md">
 								<p class="font-title-md text-title-md font-bold text-on-surface"
-									th:text=" 'ORD' + ${order.id}"></p>
+									th:text="${'ORD' + order.id}"></p>
 							</td>
 
-							<!-- Khách hàng -->
+							<!-- Khach hang -->
 							<td class="py-3 px-md">
 								<p
 									class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors cursor-pointer"
-									th:text="${order.user.username}"></p>
+									th:text="${order.customerName}"></p>
 							</td>
 
-							<!-- Ngày đặt -->
+							<!-- Code -->
 							<td class="py-3 px-md">
 								<p class="font-body-md text-body-md text-on-surface-variant"
-									th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy')}">
-								</p>
+									th:text="${order.code}"></p>
 							</td>
 
-							<!-- Tổng tiền -->
+							<!-- Ngay dat -->
+							<td class="py-3 px-md">
+								<p class="font-body-md text-body-md text-on-surface-variant"
+									th:text="${#temporals.format(order.createDate, 'dd/MM/yyyy')}"></p>
+							</td>
+
+							<!-- Tong tien -->
 							<td class="py-3 px-md text-right">
 								<p class="font-body-md text-body-md font-bold text-on-surface"
-									th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT') + ' đ'}">
-								</p>
+									th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT') + ' đ'}"></p>
 							</td>
 
-							<!-- Phương thức thanh toán -->
+							<!-- So dien thoai -->
+							<td class="py-3 px-md">
+								<p class="font-body-md text-body-md text-on-surface-variant"
+									th:text="${order.customerMobile}"></p>
+							</td>
+
+							<!-- Dia chi -->
+							<td class="py-3 px-md">
+								<p class="font-body-md text-body-md text-on-surface-variant"
+									th:text="${order.customerAddress}"></p>
+							</td>
+
+							<!-- Trang thai -->
 							<td class="py-3 px-md text-center"><span
-								class="inline-flex items-center px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-md text-label-md"
-								th:text="${order.paymentMethod}"> </span></td>
-
-							<!-- Trạng thái -->
-							<td class="py-3 px-md text-center">
-								<!-- Chờ xác nhận --> <span th:if="${order.status == 'pending'}"
+								th:if="${order.orderStatus != null and order.orderStatus.name == 'Đơn hàng mới/Chờ xử lý'}"
 								class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary-fixed text-tertiary font-label-md text-label-md">
-									Chờ xác nhận </span> <!-- Đang xử lý --> <span
-								th:if="${order.status == 'processing'}"
-								class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md border border-primary/20">
-									Đang xử lý </span> <!-- Đang giao --> <span
-								th:if="${order.status == 'shipping'}"
-								class="inline-flex items-center px-2 py-1 rounded-full bg-secondary-fixed text-secondary font-label-md text-label-md">
-									Đang giao </span> <!-- Hoàn thành --> <span
-								th:if="${order.status == 'completed'}"
-								class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md border border-primary/20">
-									Hoàn thành </span> <!-- Đã hủy --> <span
-								th:if="${order.status == 'cancelled'}"
-								class="inline-flex items-center px-2 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md border border-outline-variant/50">
-									Đã hủy </span>
+									Chờ xác nhận </span> <span
+								th:if="${order.orderStatus != null and order.orderStatus.name != 'Đơn hàng mới/Chờ xử lý'}"
+								class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md border border-primary/20"
+								th:text="${order.orderStatus.name}"> </span></td>
 
-							</td>
-
-							<!-- Action -->
+							<!-- Thao tac -->
 							<td class="py-3 px-md text-right">
 								<div class="flex items-center justify-end gap-2">
 
-									<!-- Xem chi tiết -->
+									<!-- Xem chi tiet -->
 									<a th:href="@{/admin/order/view(id=${order.id})}"
 										class="w-8 h-8 rounded hover:bg-surface-container flex items-center justify-center text-on-surface-variant transition-colors"
 										title="Xem chi tiết"> <span
@@ -508,14 +512,14 @@
 											visibility </span>
 									</a>
 
-									<!-- Chỉnh sửa -->
+									<!-- Chinh sua -->
 									<a th:href="@{/admin/order/edit(id=${order.id})}"
 										class="w-8 h-8 rounded hover:bg-surface-container flex items-center justify-center text-primary transition-colors"
 										title="Chỉnh sửa"> <span
 										class="material-symbols-outlined text-[20px]"> edit </span>
 									</a>
 
-									<!-- Xóa -->
+									<!-- Xoa -->
 									<a th:href="@{/admin/order/delete(id=${order.id})}"
 										onclick="return confirm('Bạn có chắc muốn xóa đơn hàng này không?')"
 										class="w-8 h-8 rounded hover:bg-error-container flex items-center justify-center text-error transition-colors"
@@ -531,6 +535,7 @@
 					</tbody>
 				</table>
 			</div>
+
 			<!-- Pagination (Simple) -->
 			<!-- Pagination -->
 			<div

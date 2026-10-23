@@ -1,5 +1,8 @@
 package devpro.example.CommerceAdmin.controller.administrator;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +25,12 @@ import devpro.example.CommerceAdmin.dto.CategoryDto;
 import devpro.example.CommerceAdmin.dto.OrderDto;
 import devpro.example.CommerceAdmin.model.Category;
 import devpro.example.CommerceAdmin.model.Order;
+import devpro.example.CommerceAdmin.model.OrderStatus;
+import devpro.example.CommerceAdmin.model.SaleOrder;
 import devpro.example.CommerceAdmin.model.User;
 import devpro.example.CommerceAdmin.service.OrderService;
+import devpro.example.CommerceAdmin.service.OrderStatusSerVice;
+import devpro.example.CommerceAdmin.service.SaleOrderService;
 import devpro.example.CommerceAdmin.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -33,65 +41,123 @@ import jakarta.validation.Valid;
 public class OrderController {
 
 	@Autowired
+	private OrderStatusSerVice osv;
+
+	@Autowired
 	private OrderService os;
+
+	@Autowired
+	private SaleOrderService sos;
+	
 
 	@Autowired
 	private UserService us;
 
-	@GetMapping({ "/", "" })
-	public String home(final Model model, HttpServletRequest request,
+	@GetMapping({ "", "/" })
+	public String home(Model model, HttpServletRequest request,
 
-			// Phân trang
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size,
+			// Sap xep va phan trang
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "8") int size,
+			@RequestParam(defaultValue = "createDate") String column,
+			@RequestParam(defaultValue = "desc") String direction,
 
-			// Sắp xếp
-			@RequestParam(defaultValue = "id") String column, @RequestParam(defaultValue = "desc") String direction,
+			// Tim kiem va loc
+			@RequestParam(required = false) String keyword, @RequestParam(required = false) Integer orderStatusId,
+			@RequestParam(required = false) String status,
 
-			// Tìm kiếm
-			@RequestParam(required = false) String keyword,
-			// Trạng thái đơn hàng
-			@RequestParam(required = false) String status) {
+			// Loc theo ngay dat hang
+			@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fromDate,
 
-		// Trạng thái
-		String statusFilter = null;
+			@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate toDate) {
 
-		if (status != null && !status.isEmpty()) {
-			statusFilter = status;
+		// Chuyen status sang Boolean
+		Boolean statusBool = null;
+
+		if ("true".equalsIgnoreCase(status)) {
+			statusBool = Boolean.TRUE;
+		} else if ("false".equalsIgnoreCase(status)) {
+			statusBool = Boolean.FALSE;
 		}
 
-		// Sắp xếp
-		Sort.Direction dir = direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+		// Chuyen ngay sang LocalDateTime
+		LocalDateTime fromInclusive = null;
+		LocalDateTime toInclusive = null;
 
-		// Phân trang
+		if (fromDate != null) {
+			fromInclusive = fromDate.atStartOfDay();
+		}
+
+		if (toDate != null) {
+			toInclusive = toDate.atTime(LocalTime.MAX);
+		}
+
+		// Kiem tra page va size
+		if (page < 0) {
+			page = 0;
+		}
+
+		if (size <= 0) {
+			size = 8;
+		}
+
+		// Chi cho phep sap xep theo cac truong hop le
+		if (!"id".equals(column) && !"createDate".equals(column) && !"total".equals(column) && !"code".equals(column)) {
+			column = "createDate";
+		}
+
+		// Sap xep
+		Sort.Direction dir = "asc".equalsIgnoreCase(direction) ? Sort.Direction.ASC : Sort.Direction.DESC;
+
+		// Phan trang
 		Pageable pageable = PageRequest.of(page, size, Sort.by(dir, column));
 
-		// Search + Paging
-		Page<Order> ordersPage = os.search(
-				keyword, 
-				statusFilter, 
-				pageable);
+		// Tim kiem, loc va phan trang
+		Page<SaleOrder> ordersPage = sos.search(
+		        keyword,
+		        orderStatusId,
+		        statusBool,
+		        fromInclusive,
+		        toInclusive,
+		        pageable
+		);
 
-		List<Order> orders = os.findAll();
-
+		// Du lieu bang don hang
 		model.addAttribute("ordersPage", ordersPage);
 		model.addAttribute("orders", ordersPage.getContent());
 
+		// Thong tin phan trang va sap xep
 		model.addAttribute("currentPage", page);
 		model.addAttribute("pageSize", size);
-
 		model.addAttribute("column", column);
 		model.addAttribute("direction", direction);
+		model.addAttribute("nextDir", "asc".equalsIgnoreCase(direction) ? "desc" : "asc");
 
+		// Gia tri tim kiem va bo loc
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("orderStatusId", orderStatusId);
 		model.addAttribute("status", status);
+		model.addAttribute("fromDate", fromDate);
+		model.addAttribute("toDate", toDate);
+		
+		// Thong ke don hang
+		// Thong ke don hang
+		model.addAttribute("totalOrders",
+		        sos.getTotalOrders());
 
-		model.addAttribute("totalOrders", os.getTotalOrders());
+		model.addAttribute("processingOrders",
+		        sos.getProcessingOrders());
 
-		model.addAttribute("processingOrders", os.getProcessingOrders());
+		model.addAttribute("completedOrders",
+		        sos.getCompletedOrders());
 
-		model.addAttribute("completedOrders", os.getCompletedOrders());
+		model.addAttribute("cancelledOrders",
+		        sos.getCancelledOrders());
 
-		model.addAttribute("cancelledOrders", os.getCancelledOrders());
+		// Danh sach trang thai don hang
+		model.addAttribute("orderStatuses", osv.findAll());
+		
+		model.addAttribute("orderStatuses", osv.findAll());
+		model.addAttribute("orderStatusId", orderStatusId);
 
 		return "administrator/order/order";
 	}

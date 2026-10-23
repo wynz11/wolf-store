@@ -1,17 +1,27 @@
 package devpro.example.CommerceAdmin.model;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_user")
-public class User {
+public class User implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,12 +53,31 @@ public class User {
 	@Column(name = "lastname")
 	private String lastName;
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+		name = "tbl_user_role", 
+		joinColumns = @JoinColumn(name = "user_id"), 
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
+	// Helper methods
+	public void addRelationalUserRole(Role role) {
+		roles.add(role);
+		role.getUsers().add(this);
+	}
+
+	public void removeRelationalUserRole(Role role) {
+		roles.remove(role);
+		role.getUsers().remove(this);
+	}
+	
 	public User() {
 		super();
 	}
 
 	public User(Integer id, String username, String email, LocalDate creatDate, Boolean status, String password,
-			String mobile, String description, String address, String firstName, String lastName) {
+			String mobile, String description, String address, String firstName, String lastName,
+			Set<devpro.example.CommerceAdmin.model.Role> roles) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -61,6 +90,7 @@ public class User {
 		this.address = address;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.roles = roles;
 	}
 
 	public Integer getId() {
@@ -151,7 +181,19 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return this.roles;
+	}
 	
 	
 }

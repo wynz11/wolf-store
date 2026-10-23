@@ -38,9 +38,10 @@ public class CartController extends BaseController {
 
 	@Autowired
 	private OrderStatusSerVice os;
-	
+
 	@Autowired
 	private SaleOrderService ss;
+
 //	
 	@PostMapping("/cart/add")
 	@ResponseBody
@@ -72,7 +73,7 @@ public class CartController extends BaseController {
 	public String cart(HttpSession session, Model model) {
 
 		Cart cart = getCart(session);
-		
+
 //		User loginedUser = us.findById(7);
 //		model.addAttribute("loginedUser", loginedUser);
 
@@ -108,102 +109,100 @@ public class CartController extends BaseController {
 
 		return result;
 	}
-	
+
 	@GetMapping("/checkout")
 	public String checkout(HttpSession session, Model model) {
-	    Cart cart = getCart(session);
+		Cart cart = getCart(session);
 
-	    if (cart.getItems().isEmpty()) {
-	        return "redirect:/cart";
-	    }
+		if (cart.getItems().isEmpty()) {
+			return "redirect:/cart";
+		}
 
-	    User loginedUser = us.findById(3);
+		User loginedUser = us.findById(3);
 
-	    model.addAttribute("loginedUser", loginedUser);
-	    model.addAttribute("cart", cart);
-	    model.addAttribute("cartItems", cart.getItems());
-	    model.addAttribute("subtotal", cart.getTotalCartPrice());
-	    model.addAttribute("grandTotal", cart.getGrandTotal());
-	    model.addAttribute("totalProduct", cart.getTotalProducts());
+		model.addAttribute("loginedUser", loginedUser);
+		model.addAttribute("cart", cart);
+		model.addAttribute("cartItems", cart.getItems());
+		model.addAttribute("subtotal", cart.getTotalCartPrice());
+		model.addAttribute("grandTotal", cart.getGrandTotal());
+		model.addAttribute("totalProduct", cart.getTotalProducts());
 
-	    return "storefront/home/checkout";
+		return "storefront/home/checkout";
 	}
-	
+
 	@PostMapping("/cart/place-order")
 	@ResponseBody
-	public Map<String, Object> placeOrder(
-			@RequestParam String name,
-			@RequestParam String mobile,
-			@RequestParam String address,
-			HttpSession session){
+	public Map<String, Object> placeOrder(@RequestParam String name, @RequestParam String mobile,
+			@RequestParam String address,@RequestParam(defaultValue = "") String description, HttpSession session) {
 		Map<String, Object> res = new HashMap<String, Object>();
-		
-		if(name == null || name.trim().isEmpty()) {
+
+		if (name == null || name.trim().isEmpty()) {
 			res.put("success", false);
 			res.put("message", "Ban chua nhap ten");
 			return res;
 		}
-		
-		if(mobile == null || mobile.trim().length() < 10) {
+
+		if (mobile == null || mobile.trim().length() < 10) {
 			res.put("success", false);
 			res.put("message", "Ban chua nhap dung so dien thoai");
 			return res;
 		}
-		
-		//Lay gio hang
+
+		// Lay gio hang
 		Cart cart = getCart(session);
-		
-		if(cart == null) {
+
+		if (cart == null) {
 			res.put("success", false);
 			res.put("message", "Gio hang rong, khong the dat");
 			return res;
 		}
-		
-		if(cart.getItems() == null && cart.getItems().size() <= 0) {
+
+		if (cart.getItems() == null && cart.getItems().size() <= 0) {
 			res.put("success", false);
 			res.put("message", "Gio hang rong, khong the dat");
 			return res;
 		}
-		
-		//Gio hang san sang -> Tao va luu don hang
+
+		// Gio hang san sang -> Tao va luu don hang
 		SaleOrder saleOrder = new SaleOrder();
-		
+
 		String code = mobile + "_" + new Date().getTime();
-		
+
 		saleOrder.setId(null);
-		saleOrder.setCode(null);
+		saleOrder.setCode(code); // SỬA DÒNG NÀY
 		saleOrder.setCreateDate(LocalDate.now());
 		saleOrder.setCustomerName(name);
 		saleOrder.setCustomerMobile(mobile);
 		saleOrder.setCustomerAddress(address);
 		saleOrder.setStatus(Boolean.TRUE);
 		saleOrder.setTotal(cart.getTotalCartPrice());
-		
+		saleOrder.setDescription(description);
+
 		OrderStatus orderStatus = os.findByName("Đơn hàng mới/Chờ xử lý");
-		
-		if(orderStatus == null) {
+
+		if (orderStatus == null) {
 			res.put("success", false);
 			res.put("message", "Co loi khi tao don hang");
 			return res;
 		}
 		saleOrder.setOrderStatus(orderStatus);
-		
+
 		User user = getLoginedUser();
 //		User user = us.findById(7);
-		
+
 //		if(user == null) {
 //				user = us.findByUserName("customer");
 //	}
-		
-		if(user == null) {
+
+		if (user == null) {
 			user = us.findByUserName("customer");
 		}
-		
+
 		saleOrder.setUser(user);
-		
-		//Luu cac sp trong gio hang vao tbl_sale_order_product
-		for(CartItem cartItem : cart.getItems()) {
-			
+
+		// Luu cac sp trong gio hang vao tbl_sale_order_product
+		for (CartItem cartItem : cart.getItems()) {
+
 			SaleOrderProduct product = new SaleOrderProduct();
 			product.setId(null);
 			product.setName(cartItem.getName());
@@ -211,26 +210,26 @@ public class CartController extends BaseController {
 			product.setQuantity(cartItem.getQuantity());
 			product.setCreateDate(LocalDate.now());
 			product.setStatus(Boolean.TRUE);
-			
-			//Lay san pham trong DB
+
+			// Lay san pham trong DB
 			Product dbProduct = ps.findById(cartItem.getId());
-			if(dbProduct == null) {
+			if (dbProduct == null) {
 				res.put("success", false);
 				res.put("message", "Co loi khi tao don hang");
 				return res;
 			}
-			//San pham duoc ban la sp nao
+			// San pham duoc ban la sp nao
 			product.setProduct(dbProduct);
-			//San pham duoc ban hang trong hoa don nao
+			// San pham duoc ban hang trong hoa don nao
 			product.setSaleOrder(saleOrder);
-			//Lua san pahm trong gio hang vao tbl_sale_order_product
+			// Lua san pahm trong gio hang vao tbl_sale_order_product
 			saleOrder.addRelationalSaleOrderProduct(product);
 		}
-		
-		//Luu don hang
+
+		// Luu don hang
 		ss.insert(saleOrder);
-		
-		//Xoa gio hang sau khi dat hang
+
+		// Xoa gio hang sau khi dat hang
 		cart = new Cart();
 		session.setAttribute("success", true);
 		res.put("message", "Ban da dat hang thanh cong");
